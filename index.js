@@ -4,6 +4,8 @@ let app = express()
 
 const userRouter = require("./router/user")
 const productRouter = require("./router/product")
+
+const bookRouter = require("./router/book")
 app.use(express.json()) // Middleware to parse JSON request bodies
 
 app.use((req, res,next) => {
@@ -13,7 +15,7 @@ app.use((req, res,next) => {
 
 app.use("/users", userRouter)
 app.use("/products", productRouter)
-
+app.use("/book",bookRouter)
 
 
 
