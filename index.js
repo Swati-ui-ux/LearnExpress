@@ -3,45 +3,39 @@ let express = require('express')
 let app = express()
 
 
-
-app.use((req, res, next) => {
-    console.log('This is a middleware function that runs for every request.')
-    next() // Call the next middleware or route handler
-})
-app.use('/library2', (req, res, next) => {
-    console.log('This middleware runs only for requests to the /library2 route.')
-    next() // Call the next middleware or route handler
-})
-
-app.use('/library3', (req, res, next) => {
-    console.log('This is another middleware for the /library3 route.')
-    next() // Call the next middleware or route handler
-})
 app.use(express.json()) // Middleware to parse JSON request bodies
+
+
+
 let users = [{ name: 'Vishal', age: 25 }, { name: 'Swati', age: 24 }]
 
-app.get('/', (req, res) => {
-    res.send(users)
-})  
-app.get('/welcome', (req, res) => {
-    res.send('<h1>Welcome Guest</h1>')
-}) 
+let orders = [
+    { orderId: 1, item: 'Laptop', quantity: 1 }, { orderId: 2, item: 'Phone', quantity: 2 },
+    { orderId: 3, item: 'Headphones', quantity: 1 }, { orderId: 4, item: 'Monitor', quantity: 2 }
+]
 
-app.post('/users', (req, res) => {
-    const {name} = req.body
-   
-    const newUser = { id: users.length + 1, name }
-    users.push(newUser)
-    res.status(201).json({message: 'User created successfully', user: newUser})
-
+app.get("/orders", (req, res) => {
+    res.send("Here is the list of orders")
+//   res.json(orders)
 })
-app.get("/users/:id", (req, res) => {
-    const id = parseInt(req.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-    return res.status(404).json({message:"user not found"})
-    }
-    res.json(user)
+app.post("/orders", (req, res) => {
+    // const order = req.body
+    // orders.push(order)
+    // res.status(201).json({ message: "order created", order })
+    res.send("A new order has been created.")
+    
+})
+app.get('/users', (req, res) => {
+    res.send("Here is the list of users")   
+    // res.json(users)
+})      
+
+app.post("/users", (req, res) => {
+    // const user = req.body
+    // users.push(user)
+    // res.status(202).json({message:"user created successfully",user})
+    res.send("A new user has been added.")   
+
 })
 app.listen(3000, () => {
     console.log('Server is up and running on port 3000! Ready to handle requests.')
