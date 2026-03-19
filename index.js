@@ -4,6 +4,12 @@ let app = express()
 
 
 app.use(express.json()) // Middleware to parse JSON request bodies
+
+app.use((req, res,next) => {
+    console.log(`Loggin middleware is used -> method is ${req.method}. reqest is ${req.url}`)
+    next()
+})
+
 // route for all page that not exists
 
 // app.get("*", (req, res) => {
