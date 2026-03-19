@@ -67,11 +67,13 @@ app.get("/welcome", (req, res) => {
 
 
 app.get("/welcome/:id", (req, res) => {
-
-    const id = req.params.id
-    const name = req.query.name
+ const id = req.params.id
+    const method = req.method
+    const url = req.url
+   
     const role = req.query.role
-    res.send(`<h1>Welcome, ${name}! Your ID is ${id} and your role is ${role}</h1>`)
+    console.log(`Your ID is ${id} and your role is ${role}, method id ${method}. reqest is ${url}`)
+    res.send(`<h1>Welcome,! Your ID is ${id} and your role is ${role}, method id ${method}. reqest is [${url}]</h1>`)
 })
 
 
